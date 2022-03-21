@@ -1,0 +1,421 @@
+﻿@{
+    ViewBag.Title = "Tesla";
+}
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<script>
+    $('textarea').keyup(function () {
+
+        var characterCount = $(this).val().length,
+            current = $('#current'),
+            maximum = $('#maximum'),
+            theCount = $('#the-count');
+
+        current.text(characterCount);
+
+
+        /*This isn't entirely necessary, just playin around*/
+        if (characterCount < 70) {
+            current.css('color', '#666');
+        }
+        if (characterCount > 70 && characterCount < 90) {
+            current.css('color', '#6d5555');
+        }
+        if (characterCount > 90 && characterCount < 100) {
+            current.css('color', '#793535');
+        }
+        if (characterCount > 100 && characterCount < 120) {
+            current.css('color', '#841c1c');
+        }
+        if (characterCount > 120 && characterCount < 139) {
+            current.css('color', '#8f0001');
+        }
+
+        if (characterCount >= 140) {
+            maximum.css('color', '#8f0001');
+            current.css('color', '#8f0001');
+            theCount.css('font-weight', 'bold');
+        } else {
+            maximum.css('color', '#666');
+            theCount.css('font-weight', 'normal');
+        }
+
+
+    });
+</script>
+
+<div class="w3-sidebar w3-bar-block w3" style="width:20%; margin-top:20px;background: #1d1919;">
+    <div class="w3-container w3-red">
+        <h2>Tesla APIs</h2>
+        <div style="margin-bottom:15px;"></div>
+    </div>
+
+    <span id="TeslaAPI1" class="w3-bar-item w3-button" style="color:#ffffff;">Vehicles</span>
+    <span id="TeslaAPI2" class="w3-bar-item w3-button" style="color:#ffffff;">Vehicle Details</span>
+    <span id="TeslaAPI3" class="w3-bar-item w3-button" style="color:#ffffff;">Vehicle Data</span>
+    <span id="TeslaAPI4" class="w3-bar-item w3-button" style="color:#ffffff;">Service Data</span>
+    <span id="TeslaAPI5" class="w3-bar-item w3-button" style="color:#ffffff;">Mobile Enabled</span>
+    <span id="TeslaAPI6" class="w3-bar-item w3-button" style="color:#ffffff;">Charge State</span>
+    <span id="TeslaAPI7" class="w3-bar-item w3-button" style="color:#ffffff;">Climate State</span>
+    <span id="TeslaAPI8" class="w3-bar-item w3-button" style="color:#ffffff;">Drive State</span>
+    <span id="TeslaAPI9" class="w3-bar-item w3-button" style="color:#ffffff;">GUI Settings</span>
+    <span id="TeslaAPI10" class="w3-bar-item w3-button" style="color:#ffffff;">Wake Up</span>
+    <span id="TeslaAPI11" class="w3-bar-item w3-button" style="color:#ffffff;">Unlock Doors</span>
+    <span id="TeslaAPI12" class="w3-bar-item w3-button" style="color:#ffffff;">Lock Doors</span>
+    <span id="TeslaAPI13" class="w3-bar-item w3-button" style="color:#ffffff;">Honk Horn</span>
+    <span id="TeslaAPI14" class="w3-bar-item w3-button" style="color:#ffffff;">Flash Lights</span>
+    <span id="TeslaAPI15" class="w3-bar-item w3-button" style="color:#ffffff;">Start HVAC System</span>
+    <span id="TeslaAPI16" class="w3-bar-item w3-button" style="color:#ffffff;">Stop HVAC System</span>
+    <span id="TeslaAPI17" href="#SetTemperatureSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle w3-bar-item w3-button" style="color:#ffffff;">Set Temperature</span>
+    <ul class="collapse list-unstyled" id="SetTemperatureSubmenu">
+        <li>
+            <input type="text" id="DriverTemp" name="DriverTemp" style="background:#ffffff;margin-left:15px;" placeholder="Driver Temperature">
+        </li>
+        <li>
+            <input type="text" id="PassengerTemp" name="PassengerTemp" style="background:#ffffff;margin-left:15px;" placeholder="Passenger Temperature">
+        </li>
+    </ul>
+    <span id="TeslaAPI18" href="#SetChargeLimitmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle w3-bar-item w3-button" style="color:#ffffff;">Set Charge Limit</span>
+    <ul class="collapse list-unstyled" id="SetChargeLimitmenu">
+        <li>
+            <input type="text" id="LimitValue" name="LimitValue" style="background:#ffffff;margin-left:15px;" placeholder="Limit Value">
+        </li>
+    </ul>
+    <span id="TeslaAPI19" class="w3-bar-item w3-button" style="color:#ffffff;">Set Max Range Charge Limit</span>
+    <span id="TeslaAPI20" class="w3-bar-item w3-button" style="color:#ffffff;">Set Standard Charge Limit</span>
+    <span id="TeslaAPI21" href="#ControlSunRoofmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle w3-bar-item w3-button" style="color:#ffffff;">Control Sun Roof</span>
+    <ul class="collapse list-unstyled" id="ControlSunRoofmenu">
+        <li>
+            <select name="State" id="State" style="background:#ffffff;margin-left:15px;">
+                <option value="open">open</option>
+                <option value="closed">closed</option>
+                <option value="comfort">comfort</option>
+                <option value="vent">vent</option>
+            </select>
+        </li>
+        <li>
+            <input type="text" id="Percent" name="Percent" style="background:#ffffff;margin-left:15px;" placeholder="Percent">
+        </li>
+    </ul>
+    <span id="TeslaAPI22" class="w3-bar-item w3-button" style="color:#ffffff;">Actuate Trunk</span>
+    <span id="TeslaAPI23" class="w3-bar-item w3-button" style="color:#ffffff;">Remote Start Drive</span>
+    <span id="TeslaAPI24" class="w3-bar-item w3-button" style="color:#ffffff;">Open Charge Port</span>
+    <span id="TeslaAPI25" class="w3-bar-item w3-button" style="color:#ffffff;">Close Charge Port</span>
+    <span id="TeslaAPI26" class="w3-bar-item w3-button" style="color:#ffffff;">Start Charging</span>
+    <span id="TeslaAPI27" class="w3-bar-item w3-button" style="color:#ffffff;">Stop Charging</span>
+    <span id="TeslaAPI28" class="w3-bar-item w3-button" style="color:#ffffff;">Upcoming Calendar Entries</span>
+    <span id="TeslaAPI29" href="#SetValetModemenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle w3-bar-item w3-button" style="color:#ffffff;">Set Valet Mode</span>
+    <ul class="collapse list-unstyled" id="SetValetModemenu">
+        <li>
+            <select name="On" id="On" style="background:#ffffff;margin-left:15px;">
+                <option value="On">On</option>
+                <option value="Off">Off</option>
+            </select>
+        </li>
+    </ul>
+    <span id="TeslaAPI30" class="w3-bar-item w3-button" style="color:#ffffff;">Reset Valet PIN</span>
+    <span id="TeslaAPI31" class="w3-bar-item w3-button" style="color:#ffffff;">Speed Limit Activate</span>
+    <span id="TeslaAPI32" class="w3-bar-item w3-button" style="color:#ffffff;">Speed Limit Deactivate</span>
+    <span id="TeslaAPI33" class="w3-bar-item w3-button" style="color:#ffffff;">Speed Limit Set Limit</span>
+    <span id="TeslaAPI34" class="w3-bar-item w3-button" style="color:#ffffff;margin-bottom:80px">Speed Limit Clear PIN</span>
+</div>
+
+<div style=" margin-top:50px;margin-left:30%;">
+<textarea name="the-textarea" id="ResponseTextarea" style="height:800px;width:700px;max-width:700px; background: #1d1919; color:#ffffff;" readonly autofocus></textarea>
+</div>
+
+
+<script>
+
+    var Element = {
+        FullProcess: function (URL, Type) {
+
+            document.getElementById('ResponseTextarea').innerHTML = "";
+
+            var spans = document.getElementsByClassName('w3-button');
+
+
+            for (var i = 0; i < spans.length; i++) {
+                var span = spans[i];
+                span.style.background = "#1d1919";
+                span.style.color = "#ffffff";
+            }
+
+            this.style.background = "#ffffff";
+            this.style.color = "black";
+
+
+
+            const Http = new XMLHttpRequest();
+            const url = URL;
+            Http.open(Type, url);
+            Http.send();
+
+            Http.onreadystatechange = (e) => {
+                var JsonRespEdit = Http.responseText.replace(/{\"/gi, "{\n\"");
+                JsonRespEdit = JsonRespEdit.replace(/,\"/gi, ",\n\"");
+                JsonRespEdit = JsonRespEdit.replace(/}/gi, "\n}");
+                JsonRespEdit = JsonRespEdit.replace(/\[/gi, "\[\n");
+                JsonRespEdit = JsonRespEdit.replace(/\]/gi, "\n\]");
+                JsonRespEdit = JsonRespEdit.replace(/:/gi, " : ");
+
+                document.getElementById('ResponseTextarea').innerHTML = JsonRespEdit;
+            }
+        }
+    }
+
+    var MainRequest = "/api/Tesla";
+    var SelectedVehicleId = "Your Vehicle Id";
+
+    var ChargeLimitClickCount = 0;
+    var TemperatureClickCount = 0;
+    var ControlSunRoofClickCount = 0;
+    var SetValetModeClickCount = 0;
+
+    var TeslaAPI1 = document.getElementById('TeslaAPI1');
+
+    TeslaAPI1.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI1, MainRequest + "/GetVehicles", "GET");
+    }, false);
+
+    var TeslaAPI2 = document.getElementById('TeslaAPI2');
+
+    TeslaAPI2.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI2, MainRequest + "/GetVehicle/" + SelectedVehicleId, "GET");
+    }, false);
+
+    var TeslaAPI3 = document.getElementById('TeslaAPI3');
+
+    TeslaAPI3.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI3, MainRequest + "/GetVehicleData/" + SelectedVehicleId, "GET");
+    }, false);
+
+    var TeslaAPI4 = document.getElementById('TeslaAPI4');
+
+    TeslaAPI4.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI4, MainRequest + "/GetVehicleServiceData/" + SelectedVehicleId, "GET");
+    }, false);
+
+    var TeslaAPI5 = document.getElementById('TeslaAPI5');
+
+    TeslaAPI5.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI5, MainRequest + "/GetVehicleMobileEnabled/" + SelectedVehicleId, "GET");
+    }, false);
+
+    var TeslaAPI6 = document.getElementById('TeslaAPI6');
+
+    TeslaAPI6.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI6, MainRequest + "/GetVehicleChargeState/" + SelectedVehicleId, "GET");
+    }, false);
+
+    var TeslaAPI7 = document.getElementById('TeslaAPI7');
+
+    TeslaAPI7.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI7, MainRequest + "/GetVehicleClimateState/" + SelectedVehicleId, "GET");
+    }, false);
+
+    var TeslaAPI8 = document.getElementById('TeslaAPI8');
+
+    TeslaAPI8.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI8, MainRequest + "/GetVehicleDriveState/" + SelectedVehicleId, "GET");
+    }, false);
+
+    var TeslaAPI9 = document.getElementById('TeslaAPI9');
+
+    TeslaAPI9.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI9, MainRequest + "/GetVehicleGUISettings/" + SelectedVehicleId, "GET");
+    }, false);
+
+    var TeslaAPI10 = document.getElementById('TeslaAPI10');
+
+    TeslaAPI10.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI10, MainRequest + "/POSTWakeUp/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI11 = document.getElementById('TeslaAPI11');
+
+    TeslaAPI11.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI11, MainRequest + "/POSTUnlockDoors/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI12 = document.getElementById('TeslaAPI12');
+
+    TeslaAPI12.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI12, MainRequest + "/POSTLockDoors/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI13 = document.getElementById('TeslaAPI13');
+
+    TeslaAPI13.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI13, MainRequest + "/POSTHonkHorn/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI14 = document.getElementById('TeslaAPI14');
+
+    TeslaAPI14.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI14, MainRequest + "/POSTFlashLights/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI15 = document.getElementById('TeslaAPI15');
+
+    TeslaAPI15.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI15, MainRequest + "/POSTStartHVACSystem/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI16 = document.getElementById('TeslaAPI16');
+
+    TeslaAPI16.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI16, MainRequest + "/POSTStopHVACSystem/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI17 = document.getElementById('TeslaAPI17');
+
+    TeslaAPI17.addEventListener('click', function () {
+
+        TemperatureClickCount += 1;
+
+        var DriverTemp = document.getElementById("DriverTemp").value;
+        var PassengerTemp = document.getElementById("PassengerTemp").value;
+
+        if (DriverTemp != "" && PassengerTemp != "" && TemperatureClickCount % 2 == 0) {
+            Element.FullProcess.call(TeslaAPI17, MainRequest + "/POSTSetTemperature/" + SelectedVehicleId + "/" + DriverTemp + "/" + PassengerTemp + "/", "POST");
+        }
+    }, false);
+
+    var TeslaAPI18 = document.getElementById('TeslaAPI18');
+
+    TeslaAPI18.addEventListener('click', function () {
+
+        ChargeLimitClickCount += 1;
+
+        var LimitValue = document.getElementById("LimitValue").value;
+
+        if (LimitValue != "" && ChargeLimitClickCount % 2 == 0) {
+            Element.FullProcess.call(TeslaAPI18, MainRequest + "/POSTSetChargeLimit/" + SelectedVehicleId + "/" + LimitValue + "/", "POST");
+        }
+    }, false);
+
+    var TeslaAPI19 = document.getElementById('TeslaAPI19');
+
+    TeslaAPI19.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI19, MainRequest + "/POSTSetMaxRangeChargeLimit/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI20 = document.getElementById('TeslaAPI20');
+
+    TeslaAPI20.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI20, MainRequest + "/POSTSetStandardChargeLimit/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI21 = document.getElementById('TeslaAPI21');
+
+    TeslaAPI21.addEventListener('click', function () {
+
+        ControlSunRoofClickCount += 1;
+
+        var State = document.getElementById("State").value;
+        var Percent = document.getElementById("Percent").value;
+
+        if (State != "" && Percent != "" && ControlSunRoofClickCount % 2 == 0) {
+            Element.FullProcess.call(TeslaAPI21, MainRequest + "/POSTControlSunRoof/" + SelectedVehicleId + "/" + State + "/" + Percent + "/", "POST");
+        }
+    }, false);
+
+    var TeslaAPI22 = document.getElementById('TeslaAPI22');
+
+    TeslaAPI22.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI22, MainRequest + "/POSTActuateTrunk/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI23 = document.getElementById('TeslaAPI23');
+
+    TeslaAPI23.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI23, MainRequest + "/POSTRemoteStartDrive/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI24 = document.getElementById('TeslaAPI24');
+
+    TeslaAPI24.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI24, MainRequest + "/POSTOpenChargePort/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI25 = document.getElementById('TeslaAPI25');
+
+    TeslaAPI25.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI25, MainRequest + "/POSTCloseChargePort/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI26 = document.getElementById('TeslaAPI26');
+
+    TeslaAPI26.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI26, MainRequest + "/POSTStartCharging/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI27 = document.getElementById('TeslaAPI27');
+
+    TeslaAPI27.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI27, MainRequest + "/POSTStopCharging/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI28 = document.getElementById('TeslaAPI28');
+
+    TeslaAPI28.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI28, MainRequest + "/POSTUpcomingCalendarEntries/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI29 = document.getElementById('TeslaAPI29');
+
+    TeslaAPI29.addEventListener('click', function () {
+
+        SetValetModeClickCount += 1;
+
+        var On = document.getElementById("On").value;
+
+        if (On != "" && SetValetModeClickCount % 2 == 0) {
+            if (On == "On") {
+                Element.FullProcess.call(TeslaAPI29, MainRequest + "/POSTSetValetMode/" + SelectedVehicleId + "/true", "POST");
+            }
+            else {
+                Element.FullProcess.call(TeslaAPI29, MainRequest + "/POSTSetValetMode/" + SelectedVehicleId + "/false", "POST");
+            }
+        }
+    }, false);
+
+    var TeslaAPI30 = document.getElementById('TeslaAPI30');
+
+    TeslaAPI30.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI30, MainRequest + "/POSTResetvaletPIN/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI31 = document.getElementById('TeslaAPI31');
+
+    TeslaAPI31.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI31, MainRequest + "/POSTSpeedLimitActivate/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI32 = document.getElementById('TeslaAPI32');
+
+    TeslaAPI32.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI32, MainRequest + "/POSTSpeedLimitDeactivate/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI33 = document.getElementById('TeslaAPI33');
+
+    TeslaAPI33.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI33, MainRequest + "/POSTSpeedLimitSetLimit/" + SelectedVehicleId, "POST");
+    }, false);
+
+    var TeslaAPI34 = document.getElementById('TeslaAPI34');
+
+    TeslaAPI34.addEventListener('click', function () {
+        Element.FullProcess.call(TeslaAPI34, MainRequest + "/POSTSpeedLimitClearPIN/" + SelectedVehicleId, "POST");
+    }, false);
+
+
+</script>
+
+
+
+
